@@ -1,3 +1,9 @@
+const sourceImage = document.getElementById("img") as HTMLImageElement;
+const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+const graph = document.getElementById("graph") as HTMLCanvasElement;
+const context = canvas.getContext("2d") as CanvasRenderingContext2D;
+const input = document.getElementById("input") as HTMLInputElement;
+
 const MODE = "WRASSE SC2-180";
 const VIS_CODE = 0x55d; //1373 , 0110111
 
@@ -41,17 +47,13 @@ let imageData: Uint8ClampedArray;
  */
 const readyImageData = () => {
   console.log("READING IMAGE DATA.");
-  const sourceimage = document.getElementById("img") as HTMLImageElement;
-  const canvas = document.getElementById("canvas") as HTMLCanvasElement;
   canvas.height = canvas.width = 0;
-  const context = canvas.getContext("2d") as CanvasRenderingContext2D;
-
-  const imgwidth = sourceimage.offsetWidth;
-  const imgheight = sourceimage.offsetHeight;
+  const imgwidth = sourceImage.offsetWidth;
+  const imgheight = sourceImage.offsetHeight;
   canvas.width = 320;
   canvas.height = 256;
   context.drawImage(
-    sourceimage,
+    sourceImage,
     0,
     0,
     imgwidth,
@@ -66,8 +68,30 @@ const readyImageData = () => {
   console.log("IMAGE DATA IS READY.");
 };
 
-window.onload = () => {
+function onImageChange(e: Event) {
+  if (!input?.files) {
+    return;
+  }
+
+  const file = input.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      console.log(e);
+      // @ts-ignore
+      sourceImage.src = e.target.result;
+      readyImageData();
+    };
+    reader.readAsDataURL(file);
+  } else {
+    sourceImage.src = "";
+  }
+
   readyImageData();
+}
+
+window.onload = () => {
+  input.addEventListener("change", onImageChange);
 };
 
 // const convertPixelToHz = (alpha: number) => {
