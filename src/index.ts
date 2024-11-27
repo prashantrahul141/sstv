@@ -108,19 +108,29 @@ function startTransmission() {
     endTime += porchPulse[1];
 
     for (let col = 0; col < IMG_WIDTH; col++) {
-      const pixelStart = (row * IMG_WIDTH + col) * 4; // Direct index calculation
-      const red = imageData[pixelStart];
-      const green = imageData[pixelStart + 1];
-      const blue = imageData[pixelStart + 2];
-
-      // Convert each pixel color to frequency and set value
-      oscillator.frequency.setValueAtTime(convertPixelToHz(red), endTime);
+      const pixelStart = (row * IMG_WIDTH + col) * 4;
+      oscillator.frequency.setValueAtTime(
+        convertPixelToHz(imageData[pixelStart]),
+        endTime
+      );
       endTime += 0.0007344;
+    }
 
-      oscillator.frequency.setValueAtTime(convertPixelToHz(green), endTime);
+    for (let col = 0; col < IMG_WIDTH; col++) {
+      const pixelStart = (row * IMG_WIDTH + col) * 4;
+      oscillator.frequency.setValueAtTime(
+        convertPixelToHz(imageData[pixelStart + 1]),
+        endTime
+      );
       endTime += 0.0007344;
+    }
 
-      oscillator.frequency.setValueAtTime(convertPixelToHz(blue), endTime);
+    for (let col = 0; col < IMG_WIDTH; col++) {
+      const pixelStart = (row * IMG_WIDTH + col) * 4;
+      oscillator.frequency.setValueAtTime(
+        convertPixelToHz(imageData[pixelStart + 2]),
+        endTime
+      );
       endTime += 0.0007344;
     }
   }
