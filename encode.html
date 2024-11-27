@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SND Transmission</title>
+  </head>
+  <script defer src="./dist/index.js"></script>
+  <body>
+    <input id="input" type="file" ccept="image/jpg" />
+    <button onclick="startTransmission()">start</button>
+    <div>
+      IMAGE:
+      <img id="img" src="./Assets/test01.png" width="400" height="400" />
+    </div>
+    <div>
+      CANVAS:
+      <canvas id="render" width="320" height="256"></canvas>
+    </div>
+    <div>
+      CANVAS:
+      <canvas id="canvas" width="320" height="256"></canvas>
+    </div>
+  </body>
+</html>
