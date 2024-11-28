@@ -169,8 +169,8 @@ function startTransmission() {
     }
   }
 
-  console.log("sounding");
+  console.log("start transmitting.");
   oscillator.start(startTime);
   oscillator.stop(endTime);
-  console.log("finished sounding.");
+  oscillator.onended = () => console.log("finished transmitting.");
 }
