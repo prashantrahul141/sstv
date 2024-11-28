@@ -1,6 +1,5 @@
 const sourceImage = document.getElementById("img") as HTMLImageElement;
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
-const graph = document.getElementById("graph") as HTMLCanvasElement;
 const context = canvas.getContext("2d") as CanvasRenderingContext2D;
 const input = document.getElementById("input") as HTMLInputElement;
 
@@ -47,28 +46,25 @@ let imageData: Uint8ClampedArray;
  */
 const readyImageData = () => {
   console.log("READING IMAGE DATA.");
-  canvas.height = canvas.width = 0;
-  const imgwidth = sourceImage.offsetWidth;
-  const imgheight = sourceImage.offsetHeight;
   canvas.width = 320;
   canvas.height = 256;
   context.drawImage(
     sourceImage,
     0,
     0,
-    imgwidth,
-    imgheight,
+    sourceImage.naturalWidth,
+    sourceImage.naturalHeight,
     0,
     0,
-    IMG_WIDTH,
-    IMG_HEIGHT
+    sourceImage.width,
+    sourceImage.height
   );
 
-  imageData = context.getImageData(0, 0, IMG_WIDTH, IMG_HEIGHT).data;
+  imageData = context.getImageData(0, 0, canvas.width, canvas.height).data;
   console.log("IMAGE DATA IS READY.");
 };
 
-function onImageChange(e: Event) {
+function onImageChange() {
   if (!input?.files) {
     return;
   }
@@ -76,27 +72,21 @@ function onImageChange(e: Event) {
   const file = input.files[0];
   if (file) {
     const reader = new FileReader();
+    sourceImage.onload = readyImageData;
     reader.onload = (e) => {
-      console.log(e);
+      console.log("done loading", e);
       // @ts-ignore
       sourceImage.src = e.target.result;
-      readyImageData();
     };
     reader.readAsDataURL(file);
   } else {
     sourceImage.src = "";
   }
-
-  readyImageData();
 }
 
 window.onload = () => {
   input.addEventListener("change", onImageChange);
 };
-
-// const convertPixelToHz = (alpha: number) => {
-//   return alpha * COLOR_FREQ_MULT + 1500;
-// };
 
 const convertPixelToHz = (alpha: number) => {
   return (alpha / 255) * 800 + 1500; // Map [0, 255] to [1500, 2300]
