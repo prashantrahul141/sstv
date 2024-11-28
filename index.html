@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SND Transmission</title>
-    </head>
-    <script defer src="./dist/index.js"></script>
-    <body>
-        <a href="/decode.html">DECODE</a>
-        <a href="/encode.html">ENCODE</a>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SSTV</title>
+  </head>
+  <link rel="stylesheet" href="./dist/output.css" />
+  <body
+    class="bg-[#111827] mb-36 text-white flex w-full items-center justify-center flex-col"
+  >
+    <div class="my-10 px-4 max-w-lg space-y-5">
+      <p class="text-heading text-center">Slow Scan Television (SSTV)</p>
+      <p class="label">
+        Slow-scan television (SSTV) is a picture transmission method, used
+        mainly by amateur radio operators, to transmit and receive static
+        pictures via radio in monochrome or color.
+        <a href="https://en.wikipedia.org/wiki/Slow-scan_television"
+          >Read more.</a
+        >
+      </p>
+      <p class="label">
+        This uses the WRASSE SC2-180 mode because it is probably the simplest
+        RGB SSTV mode.
+      </p>
+      <p part="label">
+        You can download the specification from
+        <a href="http://www.barberdsp.com/downloads/Dayton%20Paper.pdf"
+          >here.</a
+        >
+        <span class="text-zinc-600 dark:text-zinc-400 text-sm">
+          (assuming the link is still up.)
+        </span>
+      </p>
+    </div>
+    <div class="flex gap-4">
+      <a class="btn-link" href="/encode.html">ENCODE</a>
+      <a class="btn-link" href="/decode.html">DECODE</a>
+    </div>
+  </body>
 </html>

@@ -12,7 +12,7 @@
   }
 
   .label {
-    @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
+    @apply block text-sm font-medium text-gray-900 dark:text-white;
   }
 
   .text-heading {
@@ -20,5 +20,16 @@
   }
   .text-subheading {
     @apply mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400;
+  }
+  .text-h4 {
+    @apply text-2xl font-bold dark:text-white;
+  }
+
+  .btn-link {
+    @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800;
+  }
+
+  a {
+    @apply font-medium text-blue-600 dark:text-blue-500 hover:underline;
   }
 }
