@@ -6,15 +6,36 @@
     <title>SND Transmission</title>
   </head>
   <script defer src="./dist/index.js"></script>
-  <body>
-    <input id="input" type="file" ccept="image/jpg" />
-    <button onclick="startTransmission()">start</button>
-    <div>
-      IMAGE:
+  <link rel="stylesheet" href="./dist/output.css" />
+  <body
+    class="bg-[#111827] mb-36 text-white flex w-full items-center justify-center flex-col"
+  >
+    <div class="my-10 px-4">
+      <p class="text-heading text-center">Encoding SSTV using WRASSE SC2-180</p>
+    </div>
+    <div class="w-[320px] flex flex-col gap-3">
+      <label class="label" for="file_input">Select image</label>
+      <input
+        class="input"
+        aria-describedby="file_input_help"
+        id="input"
+        type="file"
+        accept="image"
+      />
+
+      <button onclick="startTransmission()" class="btn">
+        <p class="font-sans font-normal text-gray-700 dark:text-gray-200">
+          Start transmitting
+        </p>
+      </button>
+    </div>
+
+    <div class="mt-4">
+      <label for="img" class="label"> Original Image: </label>
       <img id="img" width="320" height="256" />
     </div>
     <div>
-      CANVAS:
+      <label for="canvas" class="label"> Transmitting Image: </label>
       <canvas id="canvas" width="320" height="256"></canvas>
     </div>
   </body>
