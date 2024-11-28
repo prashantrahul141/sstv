@@ -7,11 +7,11 @@ const MODE = "WRASSE SC2-180";
 const VIS_CODE = 0x55d; //1373 , 0110111
 
 const NUMBER_OF_LINES = 256;
-const TRANSMISSION_TIME = 182; // seconds
+const SCAN_LINE_LENGTH = 320;
 const COLOR_SCAN_TIME = 235.0; // ms (.7344ms/pixel @ 320 pixels/line)
-const IMG_WIDTH = 320;
-const IMG_HEIGHT = 256;
-const COLOR_FREQ_MULT = 3.1372549;
+const PER_PIXEL_TIME = 0.0007344; //    ^ 0.7344ms/pixel
+const IMG_HEIGHT = NUMBER_OF_LINES;
+const IMG_WIDTH = SCAN_LINE_LENGTH;
 
 // Header for WRASSE SC2-180
 const Header = [
@@ -42,7 +42,8 @@ const Header = [
 let imageData: Uint8ClampedArray;
 
 /**
- * Ready image data.
+ * Load user image to canvas to resize it into required size,
+ * then load it into `imageData`.
  */
 const readyImageData = () => {
   console.log("READING IMAGE DATA.");
@@ -64,6 +65,9 @@ const readyImageData = () => {
   console.log("IMAGE DATA IS READY.");
 };
 
+/**
+ * Event callback listener when user picks an image.
+ */
 function onImageChange() {
   if (!input?.files) {
     return;
@@ -84,14 +88,25 @@ function onImageChange() {
   }
 }
 
+/**
+ * hook event listeners.
+ */
 window.onload = () => {
   input.addEventListener("change", onImageChange);
 };
 
+/**
+ * Map color value to frequency value.
+ * @param alpha color value [0, 255]
+ * @returns mapped value from [0, 255] to [1500, 2300]
+ */
 const convertPixelToHz = (alpha: number) => {
-  return (alpha / 255) * 800 + 1500; // Map [0, 255] to [1500, 2300]
+  return (alpha / 255) * 800 + 1500;
 };
 
+/**
+ * Start transmission.
+ */
 function startTransmission() {
   if (!imageData) {
     alert("Select an image first.");
@@ -132,7 +147,7 @@ function startTransmission() {
         convertPixelToHz(imageData[pixelStart]),
         endTime
       );
-      endTime += 0.0007344;
+      endTime += PER_PIXEL_TIME;
     }
 
     for (let col = 0; col < IMG_WIDTH; col++) {
@@ -141,7 +156,7 @@ function startTransmission() {
         convertPixelToHz(imageData[pixelStart + 1]),
         endTime
       );
-      endTime += 0.0007344;
+      endTime += PER_PIXEL_TIME;
     }
 
     for (let col = 0; col < IMG_WIDTH; col++) {
@@ -150,7 +165,7 @@ function startTransmission() {
         convertPixelToHz(imageData[pixelStart + 2]),
         endTime
       );
-      endTime += 0.0007344;
+      endTime += PER_PIXEL_TIME;
     }
   }
 
