@@ -93,6 +93,11 @@ const convertPixelToHz = (alpha: number) => {
 };
 
 function startTransmission() {
+  if (!imageData) {
+    alert("Select an image first.");
+    return;
+  }
+
   const audioCtx = new window.AudioContext();
   if (audioCtx.state === "suspended") {
     audioCtx.resume();
