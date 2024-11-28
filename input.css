@@ -16,7 +16,7 @@
   }
 
   .text-heading {
-    @apply text-4xl font-extrabold dark:text-white;
+    @apply text-4xl font-extrabold text-black dark:text-white;
   }
   .text-subheading {
     @apply mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400;
@@ -31,5 +31,9 @@
 
   a {
     @apply font-medium text-blue-600 dark:text-blue-500 hover:underline;
+  }
+
+  body {
+    @apply bg-white dark:bg-[#111827];
   }
 }

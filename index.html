@@ -7,7 +7,7 @@
   </head>
   <link rel="stylesheet" href="./dist/output.css" />
   <body
-    class="bg-[#111827] mb-36 text-white flex w-full items-center justify-center flex-col"
+    class="mb-36 text-white flex w-full items-center justify-center flex-col"
   >
     <div class="my-10 px-4 max-w-lg space-y-5">
       <p class="text-heading text-center">Slow Scan Television (SSTV)</p>
@@ -23,12 +23,12 @@
         This uses the WRASSE SC2-180 mode because it is probably the simplest
         RGB SSTV mode.
       </p>
-      <p part="label">
+      <p class="label">
         You can download the specification from
         <a href="http://www.barberdsp.com/downloads/Dayton%20Paper.pdf"
           >here.</a
         >
-        <span class="text-zinc-600 dark:text-zinc-400 text-sm">
+        <span class="text-zinc-400 dark:text-zinc-400 text-sm">
           (assuming the link is still up.)
         </span>
       </p>
@@ -37,5 +37,19 @@
       <a class="btn-link" href="./encode.html">ENCODE</a>
       <a class="btn-link" href="./decode.html">DECODE</a>
     </div>
+
+    <footer class="mt-12 flex items-center justify-center">
+      <a href="https://github.com/prashantrahul141/sstv" target="_blank"
+        >Source</a
+      >
+      <span
+        class="label text-gray-700 dark:text-zinc-400 flex items-center justify-center px-2"
+      >
+        •
+      </span>
+      <a href="https://github.com/prashantrahul141/sstv" target="_blank"
+        >Home</a
+      >
+    </footer>
   </body>
 </html>
