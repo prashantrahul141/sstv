@@ -6,7 +6,7 @@
   "scripts": {
     "watch:css": "npx tailwindcss -i ./input.css -o ./dist/output.css --watch",
     "watch:ts": "tsc -w",
-    "build": "tsc && tailwindcss -i ./input.css -o ./dist/output.css",
+    "build": "tsc && tailwindcss -i ./input.css -o ./dist/output.css --minify",
     "local": "npx http-server -o ."
   },
   "keywords": [],

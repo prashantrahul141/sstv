@@ -4,39 +4,29 @@ const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 const input = document.getElementById("input");
 const MODE = "WRASSE SC2-180";
-const VIS_CODE = 0x55d; //1373 , 0110111
+const VIS_CODE = 0x55d;
 const NUMBER_OF_LINES = 256;
 const SCAN_LINE_LENGTH = 320;
-const COLOR_SCAN_TIME = 235.0; // ms (.7344ms/pixel @ 320 pixels/line)
-const PER_PIXEL_TIME = 0.0007344; //    ^ 0.7344ms/pixel
+const COLOR_SCAN_TIME = 235.0;
+const PER_PIXEL_TIME = 0.0007344;
 const IMG_HEIGHT = NUMBER_OF_LINES;
 const IMG_WIDTH = SCAN_LINE_LENGTH;
-// Header for WRASSE SC2-180
 const Header = [
-    [1900, 0.3], // leader
-    [1200, 0.01], // break
-    [1900, 0.3], // leader
-    [1200, 0.3], // VIS start
-    // VIS Code: 1300 for 0, 1100 for 1
-    [1300, 0.3], // 0
-    [1100, 0.3], // 1
-    [1100, 0.3], // 1
-    [1300, 0.3], // 0
-    [1100, 0.3], // 1
-    [1100, 0.3], // 1
-    [1100, 0.3], // 1
-    // parity.
-    // N(1's) in VIS code: 5 (odd)
-    // freq: 1100 (odd), 1300 (even)
+    [1900, 0.3],
+    [1200, 0.01],
+    [1900, 0.3],
+    [1200, 0.3],
+    [1300, 0.3],
     [1100, 0.3],
-    // VIS STOP.
+    [1100, 0.3],
+    [1300, 0.3],
+    [1100, 0.3],
+    [1100, 0.3],
+    [1100, 0.3],
+    [1100, 0.3],
     [1200, 0.3],
 ];
 let imageData;
-/**
- * Load user image to canvas to resize it into required size,
- * then load it into `imageData`.
- */
 const readyImageData = () => {
     console.log("READING IMAGE DATA.");
     canvas.width = 320;
@@ -45,9 +35,6 @@ const readyImageData = () => {
     imageData = context.getImageData(0, 0, canvas.width, canvas.height).data;
     console.log("IMAGE DATA IS READY.");
 };
-/**
- * Event callback listener when user picks an image.
- */
 function onImageChange() {
     if (!(input === null || input === void 0 ? void 0 : input.files)) {
         return;
@@ -58,7 +45,6 @@ function onImageChange() {
         sourceImage.onload = readyImageData;
         reader.onload = (e) => {
             console.log("done loading", e);
-            // @ts-ignore
             sourceImage.src = e.target.result;
         };
         reader.readAsDataURL(file);
@@ -67,23 +53,12 @@ function onImageChange() {
         sourceImage.src = "";
     }
 }
-/**
- * hook event listeners.
- */
 window.onload = () => {
     input.addEventListener("change", onImageChange);
 };
-/**
- * Map color value to frequency value.
- * @param alpha color value [0, 255]
- * @returns mapped value from [0, 255] to [1500, 2300]
- */
 const convertPixelToHz = (alpha) => {
     return (alpha / 255) * 800 + 1500;
 };
-/**
- * Start transmission.
- */
 function startTransmission() {
     if (!imageData) {
         alert("Select an image first.");
