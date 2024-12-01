@@ -82,7 +82,7 @@ function startTransmission() {
     const porchPulse = [1500, 0.0005];
     console.log("adding rows.");
     for (let row = 0; row < IMG_HEIGHT; row++) {
-        console.log(`row: ${row}`);
+        console.log(`row: ${row}/${IMG_HEIGHT}`);
         oscillator.frequency.setValueAtTime(syncPulse[0], endTime);
         endTime += syncPulse[1];
         oscillator.frequency.setValueAtTime(porchPulse[0], endTime);

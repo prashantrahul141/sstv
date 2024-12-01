@@ -135,6 +135,7 @@ function startTransmission() {
   console.log("adding rows.");
   for (let row = 0; row < IMG_HEIGHT; row++) {
     console.log(`row: ${row}`);
+    console.log(`row: ${row}/${IMG_HEIGHT}`);
     oscillator.frequency.setValueAtTime(syncPulse[0], endTime);
     endTime += syncPulse[1];
 
